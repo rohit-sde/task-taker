@@ -88,7 +88,7 @@ export default function NewChallenge({ onDone }) {
                                     scale: [0.6, 0.7, 0.8, 0.9],
                                 },
                             }}
-                            exit={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1 }}
                             transition={{ type: "spring" }}
                             key={image.alt}
                             onClick={() => handleSelectImage(image)}
