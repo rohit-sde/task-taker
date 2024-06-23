@@ -76,7 +76,10 @@ export default function NewChallenge({ onDone }) {
                         <motion.li
                             variants={{
                                 hidden: { opacity: 0, scale: 0.5 },
-                                visible: { opacity: 1, scale: 1 },
+                                visible: {
+                                    opacity: 1,
+                                    scale: [0.6, 0.7, 0.8, 0.9],
+                                },
                             }}
                             exit={{ opacity: 1, scale: 1 }}
                             transition={{ type: "spring" }}
