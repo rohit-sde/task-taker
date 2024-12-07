@@ -1,36 +1,37 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import NewChallenge from "./NewChallenge.jsx";
+import { ChallengesContext } from "../store/challenges-context.jsx";
 
 export default function Header() {
-    const [isCreatingNewChallenge, setIsCreatingNewChallenge] = useState();
+  const { isModalOpen, settingModalState } = useContext(ChallengesContext);
 
-    function handleStartAddNewChallenge() {
-        setIsCreatingNewChallenge(true);
-    }
+  function handleStartAddNewChallenge() {
+    settingModalState(true);
+  }
 
-    function handleDone() {
-        setIsCreatingNewChallenge(false);
-    }
+  function handleDone() {
+    settingModalState(false);
+  }
 
-    return (
-        <>
-            <AnimatePresence>
-                {isCreatingNewChallenge && <NewChallenge onDone={handleDone} />}
-            </AnimatePresence>
+  return (
+    <>
+      <AnimatePresence>
+        {isModalOpen && <NewChallenge onDone={handleDone} />}
+      </AnimatePresence>
 
-            <header id="main-header">
-                <h1>Your Challenges</h1>
-                <motion.button
-                    whileHover={{ scale: 1.1, backgroundColor: "#8b11f0" }}
-                    transition={{ type: "spring", stiffness: 500 }}
-                    onClick={handleStartAddNewChallenge}
-                    className="button"
-                >
-                    Add Challenge
-                </motion.button>
-            </header>
-        </>
-    );
+      <header id="main-header">
+        <h1>Your Challenges</h1>
+        <motion.button
+          whileHover={{ scale: 1.1, backgroundColor: "#8b11f0" }}
+          transition={{ type: "spring", stiffness: 500 }}
+          onClick={handleStartAddNewChallenge}
+          className="button"
+        >
+          Add Challenge
+        </motion.button>
+      </header>
+    </>
+  );
 }

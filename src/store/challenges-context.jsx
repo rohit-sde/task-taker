@@ -1,17 +1,12 @@
-import { createContext, useState } from 'react';
-
-export const ChallengesContext = createContext({
-  challenges: [],
-  addChallenge: () => {},
-  updateChallengeStatus: () => {},
-});
+import { createContext, useState } from "react";
 
 export default function ChallengesContextProvider({ children }) {
   const [challenges, setChallenges] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function addChallenge(challenge) {
     setChallenges((prevChallenges) => [
-      { ...challenge, id: Math.random().toString(), status: 'active' },
+      { ...challenge, id: Math.random().toString(), status: "active" },
       ...prevChallenges,
     ]);
   }
@@ -33,11 +28,16 @@ export default function ChallengesContextProvider({ children }) {
     );
   }
 
+  function settingModalState() {
+    setIsModalOpen((v) => !v);
+  }
   const challengesContext = {
     challenges,
     addChallenge,
     deleteChallenge,
     updateChallengeStatus,
+    settingModalState,
+    isModalOpen,
   };
 
   return (
@@ -46,3 +46,12 @@ export default function ChallengesContextProvider({ children }) {
     </ChallengesContext.Provider>
   );
 }
+
+export const ChallengesContext = createContext({
+  challenges: [],
+  addChallenge: () => {},
+  updateChallengeStatus: () => {},
+  deleteChallenge: () => {},
+  settingModalState: () => {},
+  isModalOpen: false,
+});
